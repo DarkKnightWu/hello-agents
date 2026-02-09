@@ -66,24 +66,52 @@ def merge_markdown_files(sidebar_path, base_dir, output_path):
     
     return True
 
+import json
+
 def convert_to_pdf(input_path):
-    print(f"Converting {input_path} to PDF using md-to-pdf...")
+    # Create temporary HTML file
+    html_path = input_path.replace('.md', '.html')
+    pdf_path = input_path.replace('.md', '.pdf')
+    
+    print(f"Step 1: Converting {input_path} to HTML using Pandoc...")
     try:
-        # Using npx -y to ensure md-to-pdf is available
-        result = subprocess.run(
-            ["npx", "-y", "md-to-pdf", input_path],
-            check=True,
-            capture_output=True,
-            text=True
+        subprocess.run(
+            ["pandoc", input_path, "-o", html_path],
+            check=True
         )
-        print(result.stdout)
-        print("PDF generation successful!")
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        print(f"Error during Pandoc conversion: {e}")
+        # Try fall back to md-to-pdf if pandoc fails (unlikely given verification) or just warn
+        print("Ensure 'pandoc' is installed.")
+        return False
+
+    print(f"Step 2: Converting HTML to PDF using Chrome Headless...")
+    
+    # Check for system Chrome on macOS
+    system_chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    if not os.path.exists(system_chrome):
+        print(f"Error: Google Chrome not found at {system_chrome}")
+        return False
+
+    cmd = [
+        system_chrome,
+        "--headless",
+        "--disable-gpu",
+        f"--print-to-pdf={pdf_path}",
+        f"file://{html_path}"
+    ]
+    
+    try:
+        subprocess.run(cmd, check=True)
+        print(f"PDF generation successful: {pdf_path}")
+        
+        # Cleanup HTML
+        if os.path.exists(html_path):
+            os.remove(html_path)
+            
         return True
     except subprocess.CalledProcessError as e:
-        print(f"Error during PDF conversion: {e.stderr}")
-        return False
-    except FileNotFoundError:
-        print("Error: 'npx' or 'node' not found. Please ensure Node.js is installed.")
+        print(f"Error during Chrome PDF conversion: {e}")
         return False
 
 if __name__ == "__main__":
