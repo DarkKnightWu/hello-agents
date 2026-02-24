@@ -90,6 +90,7 @@
 | [05-Agent Skills与MCP对比解读](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra05-AgentSkills解读.md)             | Agent Skills与MCP技术对比 |
 | [06-GUI Agent科普与实战](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra06-GUIAgent科普与实战.md)                | GUI Agent科普与多场景实战 |
 | [07-环境配置](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra07-环境配置.md)                | 环境配置 |
+| [08-如何写出好的Skill](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra08-如何写出好的Skill.md) | Skill 写作最佳实践 |
 
 ### PDF 版本下载
 
@@ -150,6 +151,7 @@
 - [周奥杰-DW贡献者团队](https://github.com/thunderbolt-fire) (西安交通大学, Extra02 内容贡献)
 - [张宸旭-个人开发者](https://github.com/Tasselszcx)(帝国理工学院, Extra03 内容贡献)
 - [黄宏晗-DW贡献者团队](https://github.com/XiaoMa-PM) (深圳大学, Extra04 内容贡献)
+- [王大鹏-Datawhale成员](https://github.com/ditingdapeng) (高级研发工程师, Extra08 内容贡献)
 
 ### 特别感谢
 - 感谢 [@Sm1les](https://github.com/Sm1les) 对本项目的帮助与支持
